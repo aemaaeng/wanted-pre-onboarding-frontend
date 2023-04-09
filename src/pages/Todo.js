@@ -26,9 +26,11 @@ function Todo() {
     <SMainContainer>
       <h1>Todos</h1>
       <div>Todo 등록하는 곳</div>
-      {data.map((todo) => (
-        <SingleTodo key={todo.id} data={todo} />
-      ))}
+      <ul>
+        {data.map((todo) => (
+          <SingleTodo key={todo.id} data={todo} />
+        ))}
+      </ul>
     </SMainContainer>
   );
 }
