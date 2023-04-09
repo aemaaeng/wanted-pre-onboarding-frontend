@@ -25,6 +25,11 @@ const SSubmitButton = styled(SButton)`
   padding: 10px 20px;
 `;
 
+const STodoButton = styled(SButton)`
+  font-size: 0.8rem;
+  padding: 8px 13px;
+`;
+
 function Button({ text }) {
   return <SButton>{text}</SButton>;
 }
@@ -41,4 +46,12 @@ function SubmitButton({ text, isAvailable, onClick, testId }) {
   );
 }
 
-export { Button, SubmitButton };
+function TodoButton({ text, onClick, testId }) {
+  return (
+    <STodoButton data-testid={testId} onClick={onClick}>
+      {text}
+    </STodoButton>
+  );
+}
+
+export { Button, SubmitButton, TodoButton };
