@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
+import { Button } from "../components/Button";
 import styled from "styled-components";
 
 const SMainContainer = styled.main`
@@ -23,10 +23,10 @@ function Main() {
       </Link>
       <SButtonContainer>
         <Link to="/signup">
-          <Button text="sign up" />
+          <Button text="회원가입" />
         </Link>
-        <Link to="/login">
-          <Button text="login" />
+        <Link to="/signin">
+          <Button text="로그인" />
         </Link>
       </SButtonContainer>
     </SMainContainer>
