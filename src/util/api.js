@@ -8,7 +8,7 @@ const axiosApi = (url, options) => {
   return instance;
 };
 
-// TODO: 인증이 필요한 요청
+// 인증이 필요한 요청
 const axiosAuthApi = (url, options) => {
   const accessToken = localStorage.getItem("accessToken");
   const instance = axios.create({
@@ -24,3 +24,9 @@ const axiosAuthApi = (url, options) => {
 
 export const defaultInstance = axiosApi(BASE_URL);
 export const authInstance = axiosAuthApi(BASE_URL);
+
+authInstance.interceptors.request.use(function (config) {
+  const token = localStorage.getItem("accessToken");
+  config.headers.Authorization = token ? `Bearer ${token}` : "";
+  return config;
+});
