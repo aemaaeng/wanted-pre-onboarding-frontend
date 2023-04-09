@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../components/Button";
+import InputForm from "../components/InputForm";
+import { defaultInstance } from "../util/api";
 
 const SSignupContainer = styled.main`
   display: flex;
@@ -26,6 +29,7 @@ const SSignupContainer = styled.main`
 `;
 
 function Signup() {
+  const navigate = useNavigate();
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
@@ -46,27 +50,25 @@ function Signup() {
   const isAvailable = checkInput(emailInput, passwordInput) ? true : false;
 
   const handleSubmit = () => {
-    // TODO: 회원가입 기능 구현
+    defaultInstance
+      .post(
+        "/auth/signup",
+        { email: emailInput, password: passwordInput },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then(() => navigate("/login"))
+      .catch((err) => console.log(err));
   };
 
   return (
     <SSignupContainer>
       <h1>회원가입</h1>
-      <div>
-        <label htmlFor="emailInput">이메일</label>
-        <input
-          data-testid="email-input"
-          id="emailInput"
-          onChange={(e) => handleEmailInput(e)}
-        />
-        <label htmlFor="passwordInput">비밀번호</label>
-        <input
-          data-testid="password-input"
-          id="passwordInput"
-          type="password"
-          onChange={(e) => handlePasswordInput(e)}
-        />
-      </div>
+      <InputForm
+        handleEmailInput={handleEmailInput}
+        handlePasswordInput={handlePasswordInput}
+      />
       <SubmitButton
         data-testid="signup-button"
         text="회원가입"
