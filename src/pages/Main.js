@@ -25,7 +25,7 @@ function Main() {
         <Link to="/signup">
           <Button text="회원가입" />
         </Link>
-        <Link to="/login">
+        <Link to="/signin">
           <Button text="로그인" />
         </Link>
       </SButtonContainer>

@@ -58,7 +58,7 @@ function Signup() {
           headers: { "Content-Type": "application/json" },
         }
       )
-      .then(() => navigate("/login"))
+      .then(() => navigate("/signin"))
       .catch((err) => console.log(err));
   };
 
