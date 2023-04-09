@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./pages/Main";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
+import Auth from "./pages/Auth";
 import "./App.css";
 
 function App() {
@@ -9,8 +8,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Auth pageTitle="회원가입" />} />
+        <Route path="/signin" element={<Auth pageTitle="로그인" />} />
         <Route path="/todo" element={<Main />} />
       </Routes>
     </BrowserRouter>
