@@ -29,9 +29,13 @@ function Button({ text }) {
   return <SButton>{text}</SButton>;
 }
 
-function SubmitButton({ text, isAvailable, onClick }) {
+function SubmitButton({ text, isAvailable, onClick, testId }) {
   return (
-    <SSubmitButton disabled={isAvailable ? false : true} onClick={onClick}>
+    <SSubmitButton
+      data-testid={testId}
+      disabled={isAvailable ? false : true}
+      onClick={onClick}
+    >
       {text}
     </SSubmitButton>
   );
