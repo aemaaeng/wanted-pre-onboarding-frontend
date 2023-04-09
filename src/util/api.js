@@ -15,7 +15,6 @@ const axiosAuthApi = (url, options) => {
     baseURL: url,
     headers: {
       Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
     },
     ...options,
   });
