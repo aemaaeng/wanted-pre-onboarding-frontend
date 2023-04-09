@@ -28,7 +28,7 @@ const SSignupContainer = styled.main`
   }
 `;
 
-function Signup() {
+function Auth({ pageTitle }) {
   const navigate = useNavigate();
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -49,7 +49,7 @@ function Signup() {
 
   const isAvailable = checkInput(emailInput, passwordInput) ? true : false;
 
-  const handleSubmit = () => {
+  const handleSignUpSubmit = () => {
     defaultInstance
       .post(
         "/auth/signup",
@@ -62,21 +62,46 @@ function Signup() {
       .catch((err) => console.log(err));
   };
 
+  const handleSignInSubmit = () => {
+    defaultInstance
+      .post(
+        "/auth/signin",
+        { email: emailInput, password: passwordInput },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((res) => {
+        localStorage.setItem("accessToken", res.data.access_token);
+        navigate("/todo");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <SSignupContainer>
-      <h1>회원가입</h1>
+      <h1>{pageTitle}</h1>
       <InputForm
         handleEmailInput={handleEmailInput}
         handlePasswordInput={handlePasswordInput}
       />
-      <SubmitButton
-        data-testid="signup-button"
-        text="회원가입"
-        isAvailable={isAvailable}
-        onClick={handleSubmit}
-      />
+      {pageTitle === "회원가입" ? (
+        <SubmitButton
+          testId="signup-button"
+          text="회원가입"
+          isAvailable={isAvailable}
+          onClick={handleSignUpSubmit}
+        />
+      ) : (
+        <SubmitButton
+          testId="signin-button"
+          text="로그인"
+          isAvailable={isAvailable}
+          onClick={handleSignInSubmit}
+        />
+      )}
     </SSignupContainer>
   );
 }
 
-export default Signup;
+export default Auth;
