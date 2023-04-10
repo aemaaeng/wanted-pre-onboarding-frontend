@@ -8,7 +8,7 @@ import "./App.css";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/wanted-pre-onboarding-frontend">
       <Routes>
         <Route element={<AuthenticatedRoute />}>
           <Route path="/" element={<Main />} />
