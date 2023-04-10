@@ -16,6 +16,10 @@ const SSingleTodoContainer = styled.li`
     margin-left: 3px;
   }
 
+  input[type="checkbox"] {
+    zoom: 1.4;
+  }
+
   input[data-testid="modify-input"] {
     margin-left: 3px;
     width: 140px;
