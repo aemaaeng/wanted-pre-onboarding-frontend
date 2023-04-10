@@ -5,7 +5,7 @@ import { TodoButton } from "./Button";
 
 const SSingleTodoContainer = styled.li`
   margin: 7px 0px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,18 +16,19 @@ const SSingleTodoContainer = styled.li`
     margin-left: 3px;
   }
 
-  input {
-    margin-right: 8px;
+  input[data-testid="modify-input"] {
+    margin-left: 3px;
+    width: 140px;
     height: 25px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     border: none;
     padding: 5px 5px;
-  }
 
-  input:focus {
-    outline: none;
-    border-color: var(--green);
-    box-shadow: 0 0 10px var(--green);
+    &:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 10px var(--green);
+    }
   }
 
   label {
@@ -45,15 +46,15 @@ const SSingleTodoContainer = styled.li`
 function SingleTodo({ data, handleTodoDelete }) {
   const [checked, setChecked] = useState(data.isCompleted);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [todoInput, setTodoInput] = useState(data.todo);
   const [currentTodo, setCurrentTodo] = useState(data.todo);
+  const [todoInput, setTodoInput] = useState(currentTodo);
   const id = data.id;
 
   const handleTodoCheck = () => {
     const updatedChecked = !checked;
     authInstance
       .put(`/todos/${id}`, {
-        todo: data.todo,
+        todo: currentTodo,
         isCompleted: updatedChecked,
       })
       .then(() => setChecked(updatedChecked))
