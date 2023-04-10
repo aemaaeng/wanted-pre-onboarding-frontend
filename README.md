@@ -19,3 +19,4 @@ $ npm start
 - rename: 파일명 변경
 - comment: 주석 추가 및 변경
 - refactor: 코드 리팩토링
+- chore: 코드 수정 없이 설정 변경
