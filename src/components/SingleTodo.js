@@ -10,6 +10,7 @@ const SSingleTodoContainer = styled.li`
   align-items: center;
   justify-content: space-between;
   gap: 30px;
+  width: 260px;
 
   span {
     margin-left: 3px;
