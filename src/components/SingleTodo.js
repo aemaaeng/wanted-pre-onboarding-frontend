@@ -9,7 +9,7 @@ const SSingleTodoContainer = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 30px;
+  gap: 25px;
   min-width: 260px;
 
   span {
@@ -59,6 +59,10 @@ function SingleTodo({ data, handleTodoDelete }) {
       .catch((err) => console.log(err));
   };
 
+  const handleTodoInput = (e) => {
+    setTodoInput(e.target.value);
+  };
+
   return (
     <SSingleTodoContainer>
       <label>
@@ -67,7 +71,7 @@ function SingleTodo({ data, handleTodoDelete }) {
           <input
             data-testid="modify-input"
             value={todoInput}
-            onChange={(e) => setTodoInput(e.target.value)}
+            onChange={handleTodoInput}
           />
         ) : (
           <span>{data.todo}</span>
@@ -83,7 +87,7 @@ function SingleTodo({ data, handleTodoDelete }) {
           <TodoButton
             text="취소"
             testId="cancel-button"
-            // onClick={() => handleTodoDelete(id)}
+            onClick={() => setIsEditMode(false)}
           />
         </div>
       ) : (
