@@ -2,6 +2,10 @@
 
 2023년 4월 원티드 프리온보딩 선발 과제 레포지토리입니다.
 
+## 배포
+
+🔗 [https://aemaaeng.github.io/wanted-pre-onboarding-frontend/](https://aemaaeng.github.io/wanted-pre-onboarding-frontend/)
+
 ## 코드 실행
 
 ```bash
