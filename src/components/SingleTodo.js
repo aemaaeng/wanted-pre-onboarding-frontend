@@ -46,6 +46,7 @@ function SingleTodo({ data, handleTodoDelete }) {
   const [checked, setChecked] = useState(data.isCompleted);
   const [isEditMode, setIsEditMode] = useState(false);
   const [todoInput, setTodoInput] = useState(data.todo);
+  const [currentTodo, setCurrentTodo] = useState(data.todo);
   const id = data.id;
 
   const handleTodoCheck = () => {
@@ -63,6 +64,21 @@ function SingleTodo({ data, handleTodoDelete }) {
     setTodoInput(e.target.value);
   };
 
+  const handleTodoUpdate = () => {
+    authInstance
+      .put(
+        `todos/${id}`,
+        { todo: todoInput, isCompleted: data.isCompleted },
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then((res) => {
+        setIsEditMode(false);
+        setCurrentTodo(res.data.todo);
+        setTodoInput(res.data.todo);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <SSingleTodoContainer>
       <label>
@@ -74,7 +90,7 @@ function SingleTodo({ data, handleTodoDelete }) {
             onChange={handleTodoInput}
           />
         ) : (
-          <span>{data.todo}</span>
+          <span>{currentTodo}</span>
         )}
       </label>
       {isEditMode ? (
@@ -82,12 +98,15 @@ function SingleTodo({ data, handleTodoDelete }) {
           <TodoButton
             text="제출"
             testId="submit-button"
-            // onClick={() => setIsEditMode(true)}
+            onClick={handleTodoUpdate}
           />
           <TodoButton
             text="취소"
             testId="cancel-button"
-            onClick={() => setIsEditMode(false)}
+            onClick={() => {
+              setIsEditMode(false);
+              setTodoInput(currentTodo);
+            }}
           />
         </div>
       ) : (
