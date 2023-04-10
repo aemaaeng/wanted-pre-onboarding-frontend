@@ -22,7 +22,7 @@ const SSingleTodoContainer = styled.li`
   }
 `;
 
-function SingleTodo({ data }) {
+function SingleTodo({ data, handleTodoDelete }) {
   const [checked, setChecked] = useState(data.isCompleted);
   const id = data.id;
 
@@ -45,7 +45,11 @@ function SingleTodo({ data }) {
       </label>
       <div>
         <TodoButton text="수정" testId="modify-button" />
-        <TodoButton text="삭제" testId="delete-button" />
+        <TodoButton
+          text="삭제"
+          testId="delete-button"
+          onClick={() => handleTodoDelete(id)}
+        />
       </div>
     </SSingleTodoContainer>
   );

@@ -56,6 +56,16 @@ function Todo() {
       .catch((err) => console.log(err));
   };
 
+  const handleTodoDelete = (id) => {
+    authInstance
+      .delete(`/todos/${id}`)
+      .then((res) => {
+        const newTodos = data.filter((todo) => todo.id !== id);
+        setData(newTodos);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <SMainContainer>
       <h1>Todos</h1>
@@ -72,7 +82,11 @@ function Todo() {
       </div>
       <ul>
         {data.map((todo) => (
-          <SingleTodo key={todo.id} data={todo} />
+          <SingleTodo
+            key={todo.id}
+            data={todo}
+            handleTodoDelete={handleTodoDelete}
+          />
         ))}
       </ul>
     </SMainContainer>
