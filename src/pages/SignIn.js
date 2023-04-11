@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../components/Button";
 import { defaultInstance } from "../util/api";
 import { toast } from "react-toastify";
+import AuthInput from "../components/AuthInput";
 
 const SSignInContainer = styled.main`
   display: flex;
@@ -75,21 +76,10 @@ function SignIn() {
   return (
     <SSignInContainer>
       <h1>로그인</h1>
-      <div>
-        <label htmlFor="emailInput">이메일</label>
-        <input
-          data-testid="email-input"
-          id="emailInput"
-          onChange={(e) => handleEmailInput(e)}
-        />
-        <label htmlFor="passwordInput">비밀번호</label>
-        <input
-          data-testid="password-input"
-          id="passwordInput"
-          type="password"
-          onChange={(e) => handlePasswordInput(e)}
-        />
-      </div>
+      <AuthInput
+        handleEmailInput={handleEmailInput}
+        handlePasswordInput={handlePasswordInput}
+      />
       <SubmitButton
         testId="signin-button"
         text="로그인"
