@@ -23,7 +23,6 @@ const SSingleTodoContainer = styled.li`
 
   input[data-testid="modify-input"] {
     margin-left: 3px;
-    width: 140px;
     height: 25px;
     font-size: 1.1rem;
     border: none;
@@ -49,11 +48,11 @@ const SSingleTodoContainer = styled.li`
 `;
 
 function SingleTodo({ data, handleTodoDelete }) {
+  const id = data.id;
   const [checked, setChecked] = useState(data.isCompleted);
   const [isEditMode, setIsEditMode] = useState(false);
   const [currentTodo, setCurrentTodo] = useState(data.todo);
   const [todoInput, setTodoInput] = useState(currentTodo);
-  const id = data.id;
 
   const handleTodoCheck = () => {
     const updatedChecked = !checked;
@@ -74,7 +73,7 @@ function SingleTodo({ data, handleTodoDelete }) {
     authInstance
       .put(
         `todos/${id}`,
-        { todo: todoInput, isCompleted: data.isCompleted },
+        { todo: todoInput, isCompleted: checked },
         { headers: { "Content-Type": "application/json" } }
       )
       .then((res) => {
