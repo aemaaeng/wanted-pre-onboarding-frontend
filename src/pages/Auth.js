@@ -95,14 +95,14 @@ function Auth({ pageTitle }) {
       {pageTitle === "회원가입" ? (
         <SubmitButton
           testId="signup-button"
-          text="회원가입"
+          text={pageTitle}
           isAvailable={isAvailable}
           onClick={handleSignUpSubmit}
         />
       ) : (
         <SubmitButton
           testId="signin-button"
-          text="로그인"
+          text={pageTitle}
           isAvailable={isAvailable}
           onClick={handleSignInSubmit}
         />
