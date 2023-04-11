@@ -17,14 +17,15 @@ const SSignupContainer = styled.main`
     display: block;
     height: 30px;
     width: 220px;
+    border: none;
     font-size: 1rem;
     margin-top: 3px;
     margin-bottom: 13px;
 
     &:focus {
       outline: none;
-      border-color: var(--green);
-      box-shadow: 0 0 7px var(--green);
+      border-color: var(--limeGreen);
+      box-shadow: 0 0 7px var(--limeGreen);
     }
   }
 `;

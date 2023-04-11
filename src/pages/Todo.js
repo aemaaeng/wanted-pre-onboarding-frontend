@@ -23,8 +23,8 @@ const SMainContainer = styled.main`
 
     input:focus {
       outline: none;
-      border-color: var(--green);
-      box-shadow: 0 0 10px var(--green);
+      border-color: var(--limeGreen);
+      box-shadow: 0 0 10px var(--limeGreen);
     }
   }
 `;
