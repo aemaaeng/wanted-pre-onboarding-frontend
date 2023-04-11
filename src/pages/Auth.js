@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../components/Button";
 import InputForm from "../components/InputForm";
 import { defaultInstance } from "../util/api";
+import { toast } from "react-toastify";
 
 const SSignupContainer = styled.main`
   display: flex;
@@ -16,14 +17,15 @@ const SSignupContainer = styled.main`
     display: block;
     height: 30px;
     width: 220px;
+    border: none;
     font-size: 1rem;
     margin-top: 3px;
     margin-bottom: 13px;
 
     &:focus {
       outline: none;
-      border-color: var(--green);
-      box-shadow: 0 0 7px var(--green);
+      border-color: var(--limeGreen);
+      box-shadow: 0 0 7px var(--limeGreen);
     }
   }
 `;
@@ -59,7 +61,7 @@ function Auth({ pageTitle }) {
         }
       )
       .then(() => navigate("/signin"))
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("회원가입에 실패했습니다."));
   };
 
   const handleSignInSubmit = () => {
@@ -75,7 +77,13 @@ function Auth({ pageTitle }) {
         localStorage.setItem("accessToken", res.data.access_token);
         navigate("/todo");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response.status === 404 || err.response.status === 401) {
+          return toast.error("이메일 또는 비밀번호가 틀렸습니다.");
+        }
+
+        return toast.error("로그인에 실패했습니다.");
+      });
   };
 
   return (
@@ -88,14 +96,14 @@ function Auth({ pageTitle }) {
       {pageTitle === "회원가입" ? (
         <SubmitButton
           testId="signup-button"
-          text="회원가입"
+          text={pageTitle}
           isAvailable={isAvailable}
           onClick={handleSignUpSubmit}
         />
       ) : (
         <SubmitButton
           testId="signin-button"
-          text="로그인"
+          text={pageTitle}
           isAvailable={isAvailable}
           onClick={handleSignInSubmit}
         />

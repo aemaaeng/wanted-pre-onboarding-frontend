@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 import SingleTodo from "../components/SingleTodo";
 import { TodoButton } from "../components/Button";
 import { authInstance } from "../util/api";
@@ -22,8 +23,8 @@ const SMainContainer = styled.main`
 
     input:focus {
       outline: none;
-      border-color: var(--green);
-      box-shadow: 0 0 10px var(--green);
+      border-color: var(--limeGreen);
+      box-shadow: 0 0 10px var(--limeGreen);
     }
   }
 `;
@@ -38,7 +39,7 @@ function Todo() {
       .then((res) => {
         setData(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("데이터 로딩에 실패했습니다."));
   }, []);
 
   const handleTodoChange = (e) => {
@@ -53,7 +54,7 @@ function Todo() {
         { headers: { "Content-Type": "application/json" } }
       )
       .then((res) => setData((prevData) => [...prevData, res.data]))
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("등록에 실패했습니다."));
   };
 
   const handleTodoDelete = (id) => {
@@ -63,7 +64,7 @@ function Todo() {
         const newTodos = data.filter((todo) => todo.id !== id);
         setData(newTodos);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("삭제에 실패했습니다."));
   };
 
   return (
