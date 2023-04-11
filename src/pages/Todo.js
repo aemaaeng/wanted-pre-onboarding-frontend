@@ -52,7 +52,7 @@ function Todo() {
         { todo: todoInput },
         { headers: { "Content-Type": "application/json" } }
       )
-      .then((res) => setData([...data, res.data]))
+      .then((res) => setData((prevData) => [...prevData, res.data]))
       .catch((err) => console.log(err));
   };
 
