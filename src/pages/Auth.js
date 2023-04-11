@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../components/Button";
 import InputForm from "../components/InputForm";
 import { defaultInstance } from "../util/api";
+import { toast } from "react-toastify";
 
 const SSignupContainer = styled.main`
   display: flex;
@@ -59,7 +60,7 @@ function Auth({ pageTitle }) {
         }
       )
       .then(() => navigate("/signin"))
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("회원가입에 실패했습니다."));
   };
 
   const handleSignInSubmit = () => {
@@ -75,7 +76,13 @@ function Auth({ pageTitle }) {
         localStorage.setItem("accessToken", res.data.access_token);
         navigate("/todo");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response.status === 404 || err.response.status === 401) {
+          return toast.error("이메일 또는 비밀번호가 틀렸습니다.");
+        }
+
+        return toast.error("로그인에 실패했습니다.");
+      });
   };
 
   return (
