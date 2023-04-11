@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../components/Button";
-import InputForm from "../components/InputForm";
+import AuthInput from "../components/AuthInput";
 import { defaultInstance } from "../util/api";
 import { toast } from "react-toastify";
 
@@ -89,7 +89,7 @@ function Auth({ pageTitle }) {
   return (
     <SSignupContainer>
       <h1>{pageTitle}</h1>
-      <InputForm
+      <AuthInput
         handleEmailInput={handleEmailInput}
         handlePasswordInput={handlePasswordInput}
       />

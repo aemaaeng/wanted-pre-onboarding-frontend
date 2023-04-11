@@ -1,4 +1,4 @@
-function InputForm({ handleEmailInput, handlePasswordInput }) {
+function AuthInput({ handleEmailInput, handlePasswordInput }) {
   return (
     <div>
       <label htmlFor="emailInput">이메일</label>
@@ -18,4 +18,4 @@ function InputForm({ handleEmailInput, handlePasswordInput }) {
   );
 }
 
-export default InputForm;
+export default AuthInput;
