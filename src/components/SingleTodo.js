@@ -17,7 +17,8 @@ const SSingleTodoContainer = styled.li`
   }
 
   input[type="checkbox"] {
-    zoom: 1.4;
+    transform: scale(1.5);
+    margin-right: 8px;
   }
 
   input[data-testid="modify-input"] {
