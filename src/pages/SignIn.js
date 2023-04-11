@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../components/Button";
-import InputForm from "../components/InputForm";
 import { defaultInstance } from "../util/api";
 import { toast } from "react-toastify";
+import AuthInput from "../components/AuthInput";
 
-const SSignupContainer = styled.main`
+const SSignInContainer = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,7 +30,7 @@ const SSignupContainer = styled.main`
   }
 `;
 
-function Auth({ pageTitle }) {
+function SignIn() {
   const navigate = useNavigate();
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -50,19 +50,6 @@ function Auth({ pageTitle }) {
   };
 
   const isAvailable = checkInput(emailInput, passwordInput) ? true : false;
-
-  const handleSignUpSubmit = () => {
-    defaultInstance
-      .post(
-        "/auth/signup",
-        { email: emailInput, password: passwordInput },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      )
-      .then(() => navigate("/signin"))
-      .catch((err) => toast.error("회원가입에 실패했습니다."));
-  };
 
   const handleSignInSubmit = () => {
     defaultInstance
@@ -87,29 +74,20 @@ function Auth({ pageTitle }) {
   };
 
   return (
-    <SSignupContainer>
-      <h1>{pageTitle}</h1>
-      <InputForm
+    <SSignInContainer>
+      <h1>로그인</h1>
+      <AuthInput
         handleEmailInput={handleEmailInput}
         handlePasswordInput={handlePasswordInput}
       />
-      {pageTitle === "회원가입" ? (
-        <SubmitButton
-          testId="signup-button"
-          text={pageTitle}
-          isAvailable={isAvailable}
-          onClick={handleSignUpSubmit}
-        />
-      ) : (
-        <SubmitButton
-          testId="signin-button"
-          text={pageTitle}
-          isAvailable={isAvailable}
-          onClick={handleSignInSubmit}
-        />
-      )}
-    </SSignupContainer>
+      <SubmitButton
+        testId="signin-button"
+        text="로그인"
+        isAvailable={isAvailable}
+        onClick={handleSignInSubmit}
+      />
+    </SSignInContainer>
   );
 }
 
-export default Auth;
+export default SignIn;
