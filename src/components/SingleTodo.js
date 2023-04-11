@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import { authInstance } from "../util/api";
 import { TodoButton } from "./Button";
@@ -62,7 +63,7 @@ function SingleTodo({ data, handleTodoDelete }) {
         isCompleted: updatedChecked,
       })
       .then(() => setChecked(updatedChecked))
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("요청에 실패했습니다."));
   };
 
   const handleTodoInput = (e) => {
@@ -81,7 +82,7 @@ function SingleTodo({ data, handleTodoDelete }) {
         setCurrentTodo(res.data.todo);
         setTodoInput(res.data.todo);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("수정에 실패했습니다."));
   };
 
   return (
